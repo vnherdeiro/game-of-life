@@ -30,7 +30,7 @@ else:
 	conf = conf.astype(np.int32)
 	conf_pointer = conf.ctypes.data_as( ctypes.POINTER(ctypes.c_int32))
 
-plt.figure( figsize=(12,12))
+fig = plt.figure( figsize=(12,12))
 ax = plt.gca()
 plt.tight_layout(pad=0)
 ax.set_xticks(())
@@ -40,6 +40,15 @@ colormap = "Greys"
 image = ax.imshow(conf.reshape(SIZE,SIZE) if EVOLVE_WITH_C else conf, cmap=colormap)
 step = 0
 DrawTimeStep = True
+
+def onKeyPress( event):
+	if event.key == "e":
+		print( "e pressed")
+	elif event.key == " ":
+		print( "space pressed")
+
+fig.canvas.mpl_connect( "key_pressed_event", onKeyPress)
+
 if DrawTimeStep:
 	text = ax.text(0.02, 0.98, step, va="top", ha="left", transform=ax.transAxes, color="red", fontsize=20)
 while True:
