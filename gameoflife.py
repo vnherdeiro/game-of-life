@@ -23,7 +23,7 @@ else:
 
 SIZE = int( argv[1]) if len(argv) > 1 else 200
 #conf = np.random.choice( (0,1), size=(SIZE,SIZE)).astype(int)
-conf = np.random.rand( SIZE*SIZE) > .9
+conf = np.random.rand( SIZE*SIZE) > .8 #80-20 rule, we want ~80% empty pixels at start
 if not EVOLVE_WITH_C:
 	conf = conf.reshape( SIZE,SIZE)
 else:
@@ -35,10 +35,9 @@ ax = plt.gca()
 plt.tight_layout(pad=0)
 ax.set_xticks(())
 ax.set_yticks(())
+#add pause function and export configuration
 #def onKeyPress( event):
-#	if event.key == "e":
-#		print( "e pressed")
-#	elif event.key == " ":
+#	if event.key == " ":
 #		print( "space pressed")
 #fig.canvas.mpl_connect( "key_pressed_event", onKeyPress)
 plt.ion()
@@ -54,7 +53,7 @@ while True:
 	image.set_data( conf.reshape(SIZE,SIZE) if EVOLVE_WITH_C else conf)
 	if DrawTimeStep:
 		text.set_text( step)
-	plt.pause(0.05)
+	plt.pause(0.001)
 	if EVOLVE_WITH_C:
 		evolve(conf_pointer, SIZE)
 	else:
