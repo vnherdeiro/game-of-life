@@ -46,7 +46,7 @@ while True:
 	image.set_data( conf.reshape(SIZE,SIZE) if EVOLVE_WITH_C else conf)
 	if DrawTimeStep:
 		text.set_text( step)
-	plt.pause(0.01)
+	plt.pause(0.1)
 	if EVOLVE_WITH_C:
 		evolve(conf_pointer, SIZE)
 	else:
