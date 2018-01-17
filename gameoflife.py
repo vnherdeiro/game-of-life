@@ -29,8 +29,8 @@ if len(argv) > 1: #size or file with stored configuration is passed as argument
 		conf = np.random.rand( SIZE*SIZE) > .8 #80-20 rule, we want ~80% empty pixels at start
 	except ValueError:
 		if isfile( argv[1]):
-			conf = np.load( isfile)
-			SIZE = len(conf)
+			conf = np.load( argv[1])
+			SIZE = int(np.round( np.sqrt( len(conf))))
 		else:
 			raise Exception("Missing input file")
 else:
